@@ -1,0 +1,66 @@
+<div class="container m-5 h-100 row align-items-center">
+  <div class="col">
+    <div class="card mb-4">
+      <div class="card-body text-center">
+        <img
+          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+          alt="avatar"
+          class="rounded-circle img-fluid"
+          style="width: 150px"
+        />
+        <h5 class="my-3">Name: {{ user.name | uppercase }}</h5>
+        <p class="text-muted mb-1">Email: {{ user.email }}</p>
+        <div class="d-flex justify-content-center mb-2"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h2>Your tickets</h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-group" *ngFor="let tic of tickets">
+        <li class="list-group-item">
+          <div>
+            <h5>
+              ticket id:
+              {{ tic._id }}
+            </h5>
+
+            <h5>{{ tic.bus.name }}</h5>
+            <p>
+              <span>From: </span>
+              {{ tic.bus.boarding }}
+            </p>
+            <p>
+              <span>To: </span>
+              {{ tic.bus.destination }}
+            </p>
+            <p>
+              <span>Date: </span>
+              {{ tic.bus.date }}
+            </p>
+            <p>
+              <span>Time: </span>
+              {{ tic.bus.time }}
+            </p>
+            <p>
+              <span>Price: </span>
+              {{ tic.price }}
+            </p>
+            <p>
+              <span>Number of seats: </span>
+              {{ tic.numberOfSeats }}
+            </p>
+          </div>
+          <button
+            class="btn btn-danger btn-lg btn-block"
+            (click)="cancelTicket(tic._id)"
+          >
+            Cancel Ticket
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

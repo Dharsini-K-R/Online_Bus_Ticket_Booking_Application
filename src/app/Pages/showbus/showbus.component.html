@@ -1,0 +1,12 @@
+<div class="card text-center m-5 p-5 overflow-auto min-h-75">
+  <h5 class="card-title">List of Buses</h5>
+  <ul class="list-group" *ngFor="let bus of allbuses">
+    <li class="list-group-item p-5 mt-5">
+      <h6>{{ bus.name }}</h6>
+      <p>Avalaible Seat: {{ bus.availableSeats }}</p>
+      <p>Date : {{ bus.date }}</p>
+      <p>Time : {{ bus.time }}</p>
+      <button class="btn btn-danger" (click)="onSelect(bus._id)">Book</button>
+    </li>
+  </ul>
+</div>

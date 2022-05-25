@@ -1,0 +1,42 @@
+<body class="bg-dark">
+  <section id="home" class="p-5">
+    <h1 class="text-center">BOOK MY TRIP</h1>
+    <p>Plan your trip! and book your seats on Book My Trip</p>
+    <div class="input-group m-4">
+      <select class="form-select form-select-sm mb-3" [(ngModel)]="boarding">
+        <option value="" disabled selected>Boarding</option>
+        <option *ngFor="let loc of location" [value]="loc._id">
+          {{ loc.name }}
+        </option>
+      </select>
+
+      <select class="form-select form-select-sm mb-3" [(ngModel)]="destination">
+        <option value="" disabled selected>Destination</option>
+        <option *ngFor="let loc of location" [value]="loc._id">
+          {{ loc.name }}
+        </option>
+      </select>
+      <div class="form-date mb-3">
+        <input
+          type="date"
+          class="form-control"
+          placeholder="Date"
+          required
+          [(ngModel)]="date"
+        />
+      </div>
+
+      <button class="btn mb-3 search" (click)="onSearch()">Search Buses</button>
+    </div>
+
+    <div *ngIf="buses" class="text-light">
+      <select class="form-select form-select-sm mb-3">
+        <option value="" disabled selected>Select the bus</option>
+        <option *ngFor="let bus of buses" [value]="bus._id">
+          {{ bus.name }}
+          avalaible seates: {{ bus.availableSeats }}
+        </option>
+      </select>
+    </div>
+  </section>
+</body>

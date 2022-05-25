@@ -1,0 +1,194 @@
+<div class="container mt-5">
+  <div class="col">
+    <div class="card mb-4">
+      <div class="card-body text-center">
+        <img
+          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+          alt="avatar"
+          class="rounded-circle img-fluid"
+          style="width: 150px"
+        />
+        <h5 class="my-3">Name: {{ user.name }}</h5>
+        <p class="text-muted mb-1">Email: {{ user.email }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="card text-center m-5 p-5">
+    <div class="card-body">
+      <form (submit)="addLocation()">
+        <h5 class="card-title">Add locatio</h5>
+        <input
+          class="form-control form-control-lg mb-2"
+          type="text"
+          [(ngModel)]="locationName"
+          name="locationName"
+          placeholder="Enter location name"
+        />
+        <button class="btn btn-primary" type="submit">Add Location</button>
+      </form>
+
+      <h5 class="card-title">List of location</h5>
+      <ul class="list-group" *ngFor="let loc of locations">
+        <li class="list-group-item">
+          <h6>{{ loc.name }}</h6>
+          <button class="btn btn-danger" (click)="deleteLocation(loc._id)">
+            Delete
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card text-center m-5 p-5 overflow-auto min-h-75">
+  <h5 class="card-title">List of Buses</h5>
+  <ul class="list-group" *ngFor="let b of buses">
+    <li class="list-group-item">
+      <h6>{{ b.name }}</h6>
+      <p>
+        boarding point: {{ b.boarding }}
+        <br />
+        destination: {{ b.destination }}
+      </p>
+      <p>
+        Date : {{ b.date }}
+        <br />
+        Time : {{ b.time }}
+      </p>
+      <button class="btn btn-danger" (click)="deleteBus(b._id)">Delete</button>
+    </li>
+  </ul>
+</div>
+
+<div class="card text-center m-5 p-5">
+  <h5 class="card-title">Add bus</h5>
+  <form (ngSubmit)="addBus()">
+    <div class="row">
+      <div class="col">
+        <label>Name</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Bus Name"
+          [(ngModel)]="busName"
+          name="busName"
+        />
+      </div>
+      <div class="col">
+        <label>Price</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Price"
+          [(ngModel)]="busPrice"
+          name="busPrice"
+        />
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col">
+        <select
+          class="form-select form-select-sm mb-3"
+          [(ngModel)]="busBor"
+          name="busBor"
+        >
+          <option value="">Boarding</option>
+          <option *ngFor="let loc of locations" [value]="loc._id">
+            {{ loc.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <select
+          class="form-select form-select-sm mb-3"
+          [(ngModel)]="busDes"
+          name="busDes"
+        >
+          <option value="">Destination</option>
+          <option *ngFor="let loc of locations" [value]="loc._id">
+            {{ loc.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col">
+        <label>Total Seats</label>
+        <input
+          type="number"
+          placeholder="Seats"
+          class="form-control"
+          [(ngModel)]="busSeat"
+          name="busSeat"
+        />
+      </div>
+      <div class="col">
+        <label>Available Seats</label>
+        <input
+          type="number"
+          placeholder=" Avalaible Seats"
+          class="form-control"
+        />
+      </div>
+      <div class="col">
+        <label for="">Time</label>
+        <input
+          type="time"
+          placeholder="Time"
+          class="form-control"
+          [(ngModel)]="busTime"
+          name="busTime"
+        />
+      </div>
+
+      <div class="col pt-4">
+        <label>Date</label>
+        <input
+          type="date"
+          placeholder="Date"
+          class="form-control"
+          [(ngModel)]="busDate"
+          name="busDate"
+        />
+      </div>
+    </div>
+    <div class="pt-5">
+      <button class="btn btn-primary btn-lg btn-block" type="submit">
+        Add Bus
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="card text-center m-5 p-5">
+  <h5 class="card-title">list of tickets</h5>
+  <ul class="list-group" *ngFor="let t of tickets">
+    <li class="list-group-item">
+      <h6>{{ t.name }}</h6>
+      <p>User booked: {{ t.user }}</p>
+      <p>
+        Bus Name: {{ t.bus.name }}
+        <br />
+        Price: {{ t.price }}
+      </p>
+
+      <p>
+        <span>From: </span>
+        {{ t.bus.boarding }}
+      </p>
+      <p>
+        <span>To: </span>
+        {{ t.bus.destination }}
+      </p>
+
+      <p>
+        Date : {{ t.bus.date }}
+        <br />
+        Time : {{ t.bus.time }}
+      </p>
+      <button class="btn btn-danger" (click)="deleteTicket(t._id)">
+        Delete
+      </button>
+    </li>
+  </ul>
+</div>

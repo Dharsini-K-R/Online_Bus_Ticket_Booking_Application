@@ -1,0 +1,28 @@
+<!-- caed for shwoing bus details with book  -->
+
+<div class="card mt-5">
+  <div class="card-header">
+    <h2>{{ bus.name }}</h2>
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">
+      Boarding at{{ bus.boarding }} to {{ bus.destination }}
+    </h4>
+    <br />
+    <br />
+    <h5 class="card-text">Date : {{ bus.date }} at {{ bus.time }}</h5>
+    <br />
+    <p class="card-text">Price: ${{ bus.price }}</p>
+    <br />
+    <p class="card-text">Total Seats: {{ bus.seats }}</p>
+    <br />
+    <p>Available Seats: {{ bus.availableSeats }}</p>
+    <br />
+    <input
+      type="number"
+      placeholder="Enter the number of seats"
+      [(ngModel)]="numberOfSeat"
+    />
+    <a class="btn btn-primary" (click)="bookTicket()">BOOK NOW!</a>
+  </div>
+</div>
