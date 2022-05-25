@@ -6,10 +6,11 @@ import { map } from 'rxjs';
   providedIn: 'root',
 })
 export class LocationService {
-  constructor(private http: HttpClient) {}
+  url: string = "http://44.204.150.130:2002/"
+  constructor(private http: HttpClient) { }
 
   getAllLocation() {
-    return this.http.get<any>('http://localhost:2002/api/location/all').pipe(
+    return this.http.get<any>(this.url + 'api/location/all').pipe(
       map((res) => {
         return res;
       })
@@ -20,7 +21,7 @@ export class LocationService {
     console.log(name);
     return this.http
       .post<any>(
-        `http://localhost:2002/api/user/${userID}/location/new`,
+        this.url + `api/user/${userID}/location/new`,
         {
           name: name,
         },
@@ -40,7 +41,7 @@ export class LocationService {
 
   deleteLocation(id: string, user: string) {
     return this.http
-      .delete<any>(`http://localhost:2002/api/user/${user}/location/${id}`, {
+      .delete<any>(this.url + `api/user/${user}/location/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -55,7 +56,7 @@ export class LocationService {
 
   getLocation(id: string) {
     return this.http
-      .get<{ name: string }>(`http://localhost:2002/api/location/${id}`)
+      .get<{ name: string }>(this.url + `api/location/${id}`)
       .pipe(
         map((res) => {
           return res;

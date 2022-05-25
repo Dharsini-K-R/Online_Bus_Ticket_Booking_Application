@@ -6,12 +6,13 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
   userEmail = null;
-  constructor(private http: HttpClient) {}
+  url: string = "http://44.204.150.130:2002/"
+  constructor(private http: HttpClient) { }
 
   UserLogin(email: string, password: string) {
     return this.http
       .post<{ token: string; user: object }>(
-        'http://localhost:2002/api/login',
+        this.url + 'api/login',
         {
           email,
           password,
@@ -30,7 +31,7 @@ export class AuthService {
 
   UserRegister(email: string, password: string, name: string) {
     return this.http
-      .post('http://localhost:2002/api/register', {
+      .post(this.url + 'api/register', {
         email,
         password,
         name,
@@ -81,7 +82,7 @@ export class AuthService {
   ) {
     return this.http
       .post(
-        `http://localhost:2002/api/user/${user}/ticket/book`,
+        this.url + `api/user/${user}/ticket/book`,
         {
           numberOfSeats,
           price,
@@ -106,7 +107,7 @@ export class AuthService {
   getUserTickets() {
     const userid = this.getUser()._id;
     return this.http
-      .get(`http://localhost:2002/api/user/${userid}/ticket/all`, {
+      .get(this.url + `api/user/${userid}/ticket/all`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -122,7 +123,7 @@ export class AuthService {
   getAllTickets() {
     const userid = this.getUser()._id;
     return this.http
-      .get(`http://localhost:2002/api/user/${userid}/bookings/all`, {
+      .get(this.url + `api/user/${userid}/bookings/all`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -138,7 +139,7 @@ export class AuthService {
   deleteTicket(id: string) {
     const userid = this.getUser()._id;
     return this.http
-      .delete(`http://localhost:2002/api/user/${userid}/ticket/${id}`, {
+      .delete(this.url + `api/user/${userid}/ticket/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token'),

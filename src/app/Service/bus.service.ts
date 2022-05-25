@@ -4,11 +4,13 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
+
 export class BusService {
-  constructor(private http: HttpClient) {}
+  url: string = "http://44.204.150.130:2002/"
+  constructor(private http: HttpClient) { }
 
   getAllbuses() {
-    return this.http.get('http://localhost:2002/api/buses').pipe(
+    return this.http.get(this.url + 'api/buses').pipe(
       map((res) => {
         return res;
       })
@@ -16,7 +18,7 @@ export class BusService {
   }
 
   getBusById(id: string) {
-    return this.http.get(`http://localhost:2002/api/bus/${id}`).pipe(
+    return this.http.get(this.url + `api/bus/${id}`).pipe(
       map((res) => {
         return res;
       })
@@ -25,7 +27,7 @@ export class BusService {
 
   getSearchBus(des: string, bor: string, date: Date) {
     return this.http
-      .get<any>(`http://localhost:2002/api/bus/${bor}/${des}/all`)
+      .get<any>(this.url + `api/bus/${bor}/${des}/all`)
       .pipe(
         map((res) => {
           return res;
@@ -35,7 +37,7 @@ export class BusService {
 
   deleteBus(id: string, userId: string) {
     return this.http
-      .delete<any>(`http://localhost:2002/api/user/${userId}/bus/${id}`, {
+      .delete<any>(this.url + `api/user/${userId}/bus/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -61,7 +63,7 @@ export class BusService {
   ) {
     return this.http
       .post<any>(
-        `http://localhost:2002/api/user/${userId}/bus/new`,
+        this.url + `api/user/${userId}/bus/new`,
         {
           name: busName,
           price: busPrice,
